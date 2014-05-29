@@ -52,9 +52,17 @@ public class Sandbox {
 		case TURN_RIGHT:
 			turnRight(index);
 			break;
+		case REVERSE:
+			reverse(index);
+			break;
 		}
 		
 		update(index, bump);
+	}
+	
+	private void reverse(int index){
+		Creature c = this.creatureList.get(index);
+		c.setDir(Direction.values()[(c.getDir().ordinal() + 2) % Direction.values().length]);
 	}
 	
 	private void update(int index, boolean bump){
@@ -97,7 +105,7 @@ public class Sandbox {
 			}
 			break;
 		}
-		c.setSonar(Math.min(sonar / 2.0, 5));
+		c.setSonar(sonar / 2.0);
 	}
 	
 	private boolean moveForward(int index){

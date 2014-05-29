@@ -39,7 +39,7 @@ public class InputBasedAgent extends StateBasedAgent{
 		if (tch && snd != 2 && !isTurnRightState){
 			action = MovementAction.BACKWARD;
 		}else if(!tch && snr < 2 && snd != 2 && !isTurnRightState){
-			action = MovementAction.BACKWARD; // Reverse
+			action = MovementAction.REVERSE; // Reverse
 		}else if (!tch && snr >= 2 && snr < 3 && snd != 2 && !isTurnRightState){
 			action = MovementAction.TURN_LEFT;
 		}else if (!tch && snr >= 3 && snd != 2 && !isTurnRightState){
@@ -47,7 +47,7 @@ public class InputBasedAgent extends StateBasedAgent{
 		}else if (tch && snd != 1 && isTurnRightState){
 			action = MovementAction.BACKWARD;
 		}else if(!tch && snr < 2 && snd != 1 && isTurnRightState){
-			action = MovementAction.BACKWARD; // Reverse
+			action = MovementAction.REVERSE; // Reverse
 		}else if (!tch && snr >= 2 && snr < 3 && snd != 1 && isTurnRightState){
 			action = MovementAction.TURN_RIGHT;
 		}else if (!tch && snr >= 3 && snd != 1 && isTurnRightState){
@@ -59,10 +59,10 @@ public class InputBasedAgent extends StateBasedAgent{
 			action = MovementAction.BACKWARD;
 			isTurnRightState = !isTurnRightState;
 		}else if (!tch && snr < 2 && snd == 2 && !isTurnRightState){
-			action = MovementAction.BACKWARD; // Reverse
+			action = MovementAction.REVERSE; // Reverse
 			isTurnRightState = !isTurnRightState;
 		}else if (!tch && snr < 2 && snd == 1 && isTurnRightState){
-			action = MovementAction.BACKWARD; // Reverse
+			action = MovementAction.REVERSE; // Reverse
 			isTurnRightState = !isTurnRightState;
 		}else if (!tch && snr >= 3 && snd == 2 && !isTurnRightState){
 			action = MovementAction.FORWARD;

@@ -34,7 +34,7 @@ public class ActionBasedAgent extends StateBasedAgent{
 		if (c.isHasTouched()){
 			action = MovementAction.BACKWARD;
 		}else if (!c.isHasTouched() && c.getSonar() < 2){
-			action = MovementAction.BACKWARD; // TODO: Add Reverse
+			action = MovementAction.REVERSE; // TODO: Add Reverse
 		}else if (!c.isHasTouched() && c.getSonar() >= 3){
 			action = MovementAction.FORWARD;
 		}else if (!c.isHasTouched() && c.getSonar() >= 2 && c.getSonar() < 3 && isTurnRightState){

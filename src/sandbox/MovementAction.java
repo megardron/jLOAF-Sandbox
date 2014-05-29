@@ -5,4 +5,5 @@ public enum MovementAction {
 	BACKWARD,
 	TURN_LEFT,
 	TURN_RIGHT,
+	REVERSE,
 }
