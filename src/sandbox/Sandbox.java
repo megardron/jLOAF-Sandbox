@@ -12,6 +12,13 @@ public class Sandbox {
 	public Sandbox(int size){
 		world = new int[size][size];
 		this.creatureList = new ArrayList<Creature>();
+		
+		for (int i = 0; i < size; i++){
+			world[0][i] = 1;
+			world[i][0] = 1;
+			world[size - 1][i] = 1;
+			world[i][size - 1] = 1;
+		}
 	}
 	
 	public int addCreature(Creature creature){

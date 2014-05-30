@@ -20,10 +20,15 @@ public abstract class StateBasedAgent {
 		state = new ArrayList<CreatureState>();
 		box = new Sandbox(size);
 		id = box.addCreature(createCreature());
+		box.init();
+		resetInternalState();
 	}
 	
 	public abstract MovementAction testAction(Creature c);
 	protected abstract Creature createCreature();
+	
+	protected abstract void resetInternalState();
+
 
 	public void runAgent(int iterations){
 		for (int i = 0; i < iterations; i++){

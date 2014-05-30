@@ -5,25 +5,9 @@ import sandbox.Direction;
 import sandbox.MovementAction;
 
 public class InputBasedAgent extends StateBasedAgent{
-
-	public static void main(String args[]){
-		InputBasedAgent agent = new InputBasedAgent(20);
-		agent.runAgent(100);
-		agent.saveTrace("E:\\CODING\\SandboxAgent\\GGGG");
-	}
 	
 	public InputBasedAgent(int size) {
 		super(size);
-		int world[][] = new int[size][size];
-		for (int i = 0; i < size; i++){
-			world[0][i] = 1;
-			world[i][0] = 1;
-			world[size - 1][i] = 1;
-			world[i][size - 1] = 1;
-		}
-		box.setWorld(world);
-		box.init();
-		isTurnRightState = false;
 	}
 
 	private boolean isTurnRightState;
@@ -84,6 +68,11 @@ public class InputBasedAgent extends StateBasedAgent{
 	@Override
 	protected Creature createCreature() {
 		return new Creature(2, 2, Direction.NORTH);
+	}
+
+	@Override
+	protected void resetInternalState() {
+		isTurnRightState = false;		
 	}
 
 }
