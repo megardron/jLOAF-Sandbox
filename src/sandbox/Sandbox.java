@@ -1,6 +1,7 @@
 package sandbox;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Sandbox {
@@ -113,6 +114,18 @@ public class Sandbox {
 			break;
 		}
 		c.setSonar(sonar / 2.0);
+		updateSound(c);
+	}
+	
+//	private Random r = new Random(0);
+	
+	private void updateSound(Creature c){
+//		if (c.getSound() < 1 || c.getSound() > 2){
+//			c.setSound(1);
+//		}
+//		if (r.nextGaussian() < 0.1){
+//			c.setSound((c.getSound() % 2) + 1);
+//		}
 	}
 	
 	private boolean moveForward(int index){
