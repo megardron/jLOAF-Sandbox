@@ -6,8 +6,8 @@ import sandbox.MovementAction;
 
 public class InputBasedAgent extends StateBasedAgent{
 	
-	public InputBasedAgent(int size) {
-		super(size);
+	public InputBasedAgent(int size, Creature c) {
+		super(size, c);
 	}
 
 	private boolean isTurnRightState;

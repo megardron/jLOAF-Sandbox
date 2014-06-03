@@ -19,6 +19,10 @@ public class Creature implements Serializable{
 		this(x, y, dir, false, 0, 0);
 	}
 	
+	public Creature(Creature c){
+		this(c.x, c.y, c.dir, c.hasTouched, c.sonar, c.sound);
+	}
+	
 	public Creature(int x, int y, Direction dir, boolean hasTouched, double sonar, int sound){
 		this.x = x;
 		this.y = y;

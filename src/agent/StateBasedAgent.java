@@ -16,10 +16,14 @@ public abstract class StateBasedAgent {
 	protected Sandbox box;
 	protected int id;
 	
-	public StateBasedAgent(int size){
+	public StateBasedAgent(int size, Creature c){
 		state = new ArrayList<CreatureState>();
 		box = new Sandbox(size);
-		id = box.addCreature(createCreature());
+		if (c == null){
+			id = box.addCreature(createCreature());
+		}else{
+			id = box.addCreature(c);
+		}
 		box.init();
 		resetInternalState();
 	}

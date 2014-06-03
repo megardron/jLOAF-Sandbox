@@ -6,8 +6,8 @@ import sandbox.MovementAction;
 
 public class ActionBasedAgent extends StateBasedAgent{
 
-	public ActionBasedAgent(int size){
-		super(size);			
+	public ActionBasedAgent(int size, Creature c){
+		super(size, c);			
 	}
 	
 	private boolean isTurnRightState;
