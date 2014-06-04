@@ -1,4 +1,4 @@
-package agent.state;
+package agent.backtracking;
 
 public class StateBasedAgentSenseConfig {
 	public static final String TOUCH = "Touch";

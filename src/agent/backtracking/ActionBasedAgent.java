@@ -1,4 +1,4 @@
-package agent.state;
+package agent.backtracking;
 
 import sandbox.Creature;
 import sandbox.Direction;

@@ -2,7 +2,7 @@ package sandbox.sensor;
 
 import java.util.List;
 
-import agent.state.StateBasedAgentSenseConfig;
+import agent.backtracking.StateBasedAgentSenseConfig;
 
 import sandbox.ActionHistory;
 import sandbox.Creature;

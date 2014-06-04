@@ -3,7 +3,7 @@ package agent;
 import java.util.ArrayList;
 import java.util.List;
 
-import agent.state.CreatureState;
+import agent.backtracking.CreatureState;
 
 import sandbox.Creature;
 import sandbox.MovementAction;
