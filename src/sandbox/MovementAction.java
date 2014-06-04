@@ -6,4 +6,6 @@ public enum MovementAction {
 	TURN_LEFT,
 	TURN_RIGHT,
 	REVERSE,
+	
+	REMOVE_OBSTACLE,
 }

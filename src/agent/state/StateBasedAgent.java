@@ -1,39 +1,22 @@
-package agent;
+package agent.state;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+import agent.AbstractSandboxAgent;
 import sandbox.Creature;
 import sandbox.MovementAction;
-import sandbox.Sandbox;
 
-public abstract class StateBasedAgent {
+public abstract class StateBasedAgent extends AbstractSandboxAgent {
 
-	protected List<CreatureState> state;
-	protected Sandbox box;
-	protected int id;
-	
 	public StateBasedAgent(int size, Creature c){
-		state = new ArrayList<CreatureState>();
-		box = new Sandbox(size);
-		if (c == null){
-			id = box.addCreature(createCreature());
-		}else{
-			id = box.addCreature(c);
-		}
-		box.init();
+		super(size, c);
 		resetInternalState();
 	}
 	
-	public abstract MovementAction testAction(Creature c);
-	protected abstract Creature createCreature();
-	
 	protected abstract void resetInternalState();
-
-
+	
 	public void runAgent(int iterations){
 		for (int i = 0; i < iterations; i++){
 			Creature c = box.getCreature().get(id);
@@ -46,7 +29,7 @@ public abstract class StateBasedAgent {
 		}
 	}
 	
-	public void saveTrace(String filename){
+	public void saveTrace(String filename) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			for  (CreatureState s : state){

@@ -1,8 +1,8 @@
-package agent;
+package agent.state;
 
 import sandbox.MovementAction;
 
-class CreatureState {
+public class CreatureState {
 	private boolean hasTouched;
 	private double sonar;
 	private int sound;

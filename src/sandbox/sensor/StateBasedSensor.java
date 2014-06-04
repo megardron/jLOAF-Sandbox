@@ -2,7 +2,7 @@ package sandbox.sensor;
 
 import java.util.List;
 
-import agent.StateBasedAgentSenseConfig;
+import agent.state.StateBasedAgentSenseConfig;
 
 import sandbox.ActionHistory;
 import sandbox.Creature;
@@ -17,7 +17,7 @@ public class StateBasedSensor extends Sensor {
 
 	@Override
 	public void updateSenses(Sandbox sandbox) {
-		if (senses.size() != 3){
+		if (senses.size() != StateBasedAgentSenseConfig.SENSOR_COUNT){
 			return;
 		}
 		updateSound(this.senses.get(StateBasedAgentSenseConfig.SOUND), sandbox);

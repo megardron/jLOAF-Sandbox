@@ -18,10 +18,10 @@ public class Sandbox {
 		this.creatureList = new ArrayList<Creature>();
 		
 		for (int i = 0; i < size; i++){
-			world[0][i] = 1;
-			world[i][0] = 1;
-			world[size - 1][i] = 1;
-			world[i][size - 1] = 1;
+			world[0][i] = Obstacle.WALL.getId();
+			world[i][0] = Obstacle.WALL.getId();
+			world[size - 1][i] = Obstacle.WALL.getId();
+			world[i][size - 1] = Obstacle.WALL.getId();
 		}
 		this.lastActionHistory = new HashMap<Creature, ActionHistory>();
 	}
@@ -71,10 +71,23 @@ public class Sandbox {
 		case REVERSE:
 			reverse(index);
 			break;
+		case REMOVE_OBSTACLE:
+			removeObstacle(index);
+			break;
 		}
 		Creature c = this.creatureList.get(index);
 		this.lastActionHistory.put(c, new ActionHistory(action, !bump));
 		c.getSensor().updateSenses(this);
+	}
+	
+	private void removeObstacle(int index){
+		Creature c = this.creatureList.get(index);
+		int x = c.getX();
+		int y = c.getY();
+		Obstacle o = Obstacle.idToEnum(world[x][y]);
+		if(!o.isClippable()){
+			world[x][y] = Obstacle.NOTHING.getId();
+		}
 	}
 	
 	private void reverse(int index){
@@ -114,7 +127,9 @@ public class Sandbox {
 			return true;
 		}else if(oldX >= world.length || oldY >= world[0].length){
 			return true;
-		}else if(world[oldX][oldY] != 0){
+		}
+		Obstacle o = Obstacle.idToEnum(world[oldX][oldY]);
+		if(o.isClippable()){
 			return true;
 		}
 		c.setX(oldX);

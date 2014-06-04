@@ -1,4 +1,4 @@
-package agent;
+package agent.state;
 
 import sandbox.Creature;
 import sandbox.Direction;
