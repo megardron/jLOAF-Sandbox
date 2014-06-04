@@ -1,7 +1,5 @@
 package agent;
 
-import sandbox.Creature;
-import sandbox.Direction;
 import sandbox.MovementAction;
 
 class CreatureState {
@@ -15,10 +13,6 @@ class CreatureState {
 		this.sonar = sonar;
 		this.sound = sound;
 		this.action = action;
-	}
-	
-	public Creature buildCreatureFromState(){
-		return new Creature(-1, -1, Direction.NORTH, this.hasTouched, this.sonar, this.sound);
 	}
 	
 	public MovementAction getAction(){

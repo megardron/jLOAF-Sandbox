@@ -3,6 +3,7 @@ package agent;
 import sandbox.Creature;
 import sandbox.Direction;
 import sandbox.MovementAction;
+import sandbox.creature.StateBasedCreature;
 
 public class InputBasedAgent extends StateBasedAgent{
 	
@@ -16,9 +17,9 @@ public class InputBasedAgent extends StateBasedAgent{
 	public MovementAction testAction(Creature c) {
 		MovementAction action = null;
 		
-		boolean tch = c.isHasTouched();
-		double snr = c.getSonar();
-		int snd = c.getSound();
+		boolean tch = (boolean)c.getSensor().getSense(StateBasedAgentSenseConfig.TOUCH).getValue();
+		double snr = (double)c.getSensor().getSense(StateBasedAgentSenseConfig.SONAR).getValue();
+		int snd = (int)c.getSensor().getSense(StateBasedAgentSenseConfig.SOUND).getValue();
 		
 		if (tch && snd != 2 && !isTurnRightState){
 			action = MovementAction.BACKWARD;
@@ -67,7 +68,7 @@ public class InputBasedAgent extends StateBasedAgent{
 
 	@Override
 	protected Creature createCreature() {
-		return new Creature(2, 2, Direction.NORTH);
+		return new StateBasedCreature(2, 2, Direction.NORTH);
 	}
 
 	@Override

@@ -38,7 +38,10 @@ public abstract class StateBasedAgent {
 		for (int i = 0; i < iterations; i++){
 			Creature c = box.getCreature().get(id);
 			MovementAction action = testAction(c);
-			state.add(new CreatureState(c.isHasTouched(), c.getSonar(), c.getSound(), action));
+			boolean hasTouched = (boolean)c.getSensor().getSense(StateBasedAgentSenseConfig.TOUCH).getValue();
+			double sonar = (double)c.getSensor().getSense(StateBasedAgentSenseConfig.SONAR).getValue();
+			int sound = (int)c.getSensor().getSense(StateBasedAgentSenseConfig.SOUND).getValue();
+			state.add(new CreatureState(hasTouched, sonar, sound, action));
 			box.takeAction(id, action);
 		}
 	}
@@ -54,7 +57,6 @@ public abstract class StateBasedAgent {
 			}
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

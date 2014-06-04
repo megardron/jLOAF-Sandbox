@@ -1,8 +1,9 @@
 package sandbox;
 
 import java.io.Serializable;
+import sandbox.sensor.Sensor;
 
-public class Creature implements Serializable{
+public abstract class Creature implements Serializable{
 	/**
 	 * 
 	 */
@@ -11,50 +12,19 @@ public class Creature implements Serializable{
 	private int y;
 	private Direction dir;
 	
-	private boolean hasTouched;
-	private double sonar;
-	private int sound;
-	
-	public Creature(int x, int y, Direction dir) {
-		this(x, y, dir, false, 0, 0);
-	}
+	protected Sensor sensor;
 	
 	public Creature(Creature c){
-		this(c.x, c.y, c.dir, c.hasTouched, c.sonar, c.sound);
+		this(c.x, c.y, c.dir);
 	}
 	
-	public Creature(int x, int y, Direction dir, boolean hasTouched, double sonar, int sound){
+	public Creature(int x, int y, Direction dir){
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.hasTouched = hasTouched;
-		this.sonar = sonar;
-		this.sound = sound;
 	}
 	
-	public boolean isHasTouched() {
-		return hasTouched;
-	}
-
-	public void setHasTouched(boolean hasTouched) {
-		this.hasTouched = hasTouched;
-	}
-
-	public double getSonar() {
-		return sonar;
-	}
-
-	public void setSonar(double sonar) {
-		this.sonar = sonar;
-	}
-
-	public int getSound() {
-		return sound;
-	}
-
-	public void setSound(int sound) {
-		this.sound = sound;
-	}
+	public abstract Sensor getSensor();
 
 	public int getX() {
 		return x;
@@ -87,9 +57,6 @@ public class Creature implements Serializable{
 		}
 		Creature c = (Creature)o;
 		if (this.x != c.x || this.y != c.y || !this.dir.equals(c.dir)){
-			return false;
-		}
-		if (!this.hasTouched || !c.hasTouched || this.sonar != c.sonar || this.sound != c.sound){
 			return false;
 		}
 		return true;

@@ -1,7 +1,8 @@
 package sandbox;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 
 public class Sandbox {
@@ -9,6 +10,8 @@ public class Sandbox {
 	private List<Creature> creatureList;
 	
 	private int world[][];
+	
+	private Map<Creature, ActionHistory> lastActionHistory;
 	
 	public Sandbox(int size){
 		world = new int[size][size];
@@ -20,6 +23,7 @@ public class Sandbox {
 			world[size - 1][i] = 1;
 			world[i][size - 1] = 1;
 		}
+		this.lastActionHistory = new HashMap<Creature, ActionHistory>();
 	}
 	
 	public int addCreature(Creature creature){
@@ -33,7 +37,7 @@ public class Sandbox {
 	
 	public void init(){
 		for (int i = 0; i < this.creatureList.size(); i++){
-			update(i, false);
+			this.creatureList.get(i).getSensor().updateSenses(this);
 		}
 	}
 	
@@ -43,6 +47,10 @@ public class Sandbox {
 	
 	public List<Creature> getCreature(){
 		return this.creatureList;
+	}
+	
+	public ActionHistory getLastActionHistory(Creature c){
+		return this.lastActionHistory.get(c);
 	}
 	
 	public void takeAction(int index, MovementAction action){
@@ -64,68 +72,14 @@ public class Sandbox {
 			reverse(index);
 			break;
 		}
-		
-		update(index, bump);
+		Creature c = this.creatureList.get(index);
+		this.lastActionHistory.put(c, new ActionHistory(action, !bump));
+		c.getSensor().updateSenses(this);
 	}
 	
 	private void reverse(int index){
 		Creature c = this.creatureList.get(index);
 		c.setDir(Direction.values()[(c.getDir().ordinal() + 2) % Direction.values().length]);
-	}
-	
-	private void update(int index, boolean bump){
-		Creature c = this.creatureList.get(index);
-		c.setHasTouched(bump);
-		int sonar = 0;
-		int oldX = c.getX();
-		int oldY = c.getY();
-		switch(c.getDir()){
-		case NORTH:
-			for (int i = oldX; i >= 0; i--){
-				if (world[i][oldY] != 0){
-					break;
-				}
-				sonar++;
-			}
-			break;
-		case SOUTH:
-			for (int i = oldX; i < world.length; i++){
-				if (world[i][oldY] != 0){
-					break;
-				}
-				sonar++;
-			}
-			break;
-		case EAST:
-			for (int i = oldY; i < world[0].length; i++){
-				if (world[oldX][i] != 0){
-					break;
-				}
-				sonar++;
-			}
-			break;
-		case WEST:
-			for (int i = oldY; i >= 0; i--){
-				if (world[oldX][i] != 0){
-					break;
-				}
-				sonar++;
-			}
-			break;
-		}
-		c.setSonar(sonar / 2.0);
-		updateSound(c);
-	}
-	
-//	private Random r = new Random(0);
-	
-	private void updateSound(Creature c){
-//		if (c.getSound() < 1 || c.getSound() > 2){
-//			c.setSound(1);
-//		}
-//		if (r.nextGaussian() < 0.1){
-//			c.setSound((c.getSound() % 2) + 1);
-//		}
 	}
 	
 	private boolean moveForward(int index){
