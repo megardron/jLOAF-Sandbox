@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import agent.AbstractSandboxAgent;
+import agent.AgentState;
 import sandbox.Creature;
 import sandbox.MovementAction;
 
@@ -24,7 +25,7 @@ public abstract class StateBasedAgent extends AbstractSandboxAgent {
 			boolean hasTouched = (boolean)c.getSensor().getSense(StateBasedAgentSenseConfig.TOUCH).getValue();
 			double sonar = (double)c.getSensor().getSense(StateBasedAgentSenseConfig.SONAR).getValue();
 			int sound = (int)c.getSensor().getSense(StateBasedAgentSenseConfig.SOUND).getValue();
-			state.add(new CreatureState(hasTouched, sonar, sound, action));
+			state.add(new BacktrackingAgentState(hasTouched, sonar, sound, action));
 			box.takeAction(id, action);
 		}
 	}
@@ -32,11 +33,14 @@ public abstract class StateBasedAgent extends AbstractSandboxAgent {
 	public void saveTrace(String filename) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-			for  (CreatureState s : state){
-				int touch = (s.isHasTouched()) ? 1 : 0;
-				double sonar = s.getSonar();
-				int sound = s.getSound();
-				writer.append(touch + "|" + sonar + "|" + sound + "|" + s.getAction().toString() + "\n");
+			for  (AgentState s : state){
+				if (s instanceof BacktrackingAgentState){
+					BacktrackingAgentState b = (BacktrackingAgentState)s;
+					int touch = (b.isHasTouched()) ? 1 : 0;
+					double sonar = b.getSonar();
+					int sound = b.getSound();
+					writer.append(touch + "|" + sonar + "|" + sound + "|" + s.getAction().toString() + "\n");
+				}
 			}
 			writer.close();
 		} catch (IOException e) {

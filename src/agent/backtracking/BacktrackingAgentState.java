@@ -1,22 +1,19 @@
 package agent.backtracking;
 
+import agent.AgentState;
 import sandbox.MovementAction;
 
-public class CreatureState {
+public class BacktrackingAgentState extends AgentState{
 	private boolean hasTouched;
 	private double sonar;
 	private int sound;
-	private MovementAction action;
 	
-	public CreatureState(boolean hasTouched, double sonar, int sound, MovementAction action) {
+	
+	public BacktrackingAgentState(boolean hasTouched, double sonar, int sound, MovementAction action) {
+		super(action);
 		this.hasTouched = hasTouched;
 		this.sonar = sonar;
 		this.sound = sound;
-		this.action = action;
-	}
-	
-	public MovementAction getAction(){
-		return action;
 	}
 	
 	public boolean isHasTouched() {
