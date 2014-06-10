@@ -38,10 +38,10 @@ public abstract class DirtBasedAgent extends AbstractSandboxAgent {
 			return MovementAction.FORWARD;
 		}else if (Math.abs(dirt.ordinal() - c.ordinal()) == 2){
 			return MovementAction.BACKWARD;
-		}else if ((c.ordinal() + 1) % Direction.values().length == dirt.ordinal()){
-			return MovementAction.TURN_RIGHT;
-		}else if ((((c.ordinal() - 1) < 0)? (c.ordinal() - 1) + Direction.values().length :(c.ordinal() - 1)) == dirt.ordinal()){
-			return MovementAction.TURN_LEFT;
+		}else if (Direction.getNextDirection(MovementAction.MOVE_RIGHT, c).equals(dirt)){
+			return MovementAction.MOVE_RIGHT;
+		}else if (Direction.getNextDirection(MovementAction.MOVE_LEFT, c).equals(dirt)){
+			return MovementAction.MOVE_LEFT;
 		}
 		return null;
 	}
@@ -59,7 +59,7 @@ public abstract class DirtBasedAgent extends AbstractSandboxAgent {
 					for (Direction d : Direction.values()){
 						output += dist[d.ordinal()] + "|" + type[d.ordinal()] + "|";
 					}
-					output = output.substring(0, output.length() - 2);
+					output += s.getAction().name();
 					writer.write(output + "\n");
 				}
 			}

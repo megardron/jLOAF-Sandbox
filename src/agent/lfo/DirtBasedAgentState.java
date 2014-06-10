@@ -12,6 +12,8 @@ public class DirtBasedAgentState extends AgentState{
 	
 	public DirtBasedAgentState(MovementAction action, Sensor sensor) {
 		super(action);
+		dist = new int [Direction.values().length];
+		type = new int [Direction.values().length];
 		
 		for (String s : sensor.getSenseKeys()){
 			String tag[] = s.split("-");

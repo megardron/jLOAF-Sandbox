@@ -20,7 +20,6 @@ public class DirtBasedSensor extends Sensor{
 			return;
 		}
 		int[][] world = sandbox.getWorld();
-		
 		int oldX = c.getX();
 		int oldY = c.getY();
 		for (Direction d : Direction.values()){
@@ -65,11 +64,11 @@ public class DirtBasedSensor extends Sensor{
 				break;
 			}
 			ActionHistory h = sandbox.getLastActionHistory(c);
-			this.senses.get(d.name() + DirtBasedAgentSenseConfig.TYPE_SUFFIX).setValue(obstacle);
-			if (h.isAbleToTake()){
-				this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(count);
-			}else{
+			this.senses.get(d.name() + DirtBasedAgentSenseConfig.TYPE_SUFFIX).setValue(obstacle); 
+			if (h != null && !h.isAbleToTake() && c.getDir().equals(d)){
 				this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(-1);
+			}else{
+				this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(count);
 			}
 		}
 	}

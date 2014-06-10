@@ -20,6 +20,10 @@ public class DirtBasedCreature extends Creature {
 	public DirtBasedCreature(int x, int y, Direction dir) {
 		super(x, y, dir);
 	}
+	
+	public DirtBasedCreature(Creature c){
+		super(c);
+	}
 
 	@Override
 	public Sensor getSensor() {

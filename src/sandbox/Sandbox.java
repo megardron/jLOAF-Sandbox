@@ -94,6 +94,15 @@ public class Sandbox {
 		Creature c = this.creatureList.get(index);
 		int x = c.getX();
 		int y = c.getY();
+		
+		clearSpace(x, y);
+		clearSpace(Math.max(x - 1, 0), y);
+		clearSpace(Math.min(x + 1, world.length - 1), y);
+		clearSpace(x, Math.max(y - 1, 0));
+		clearSpace(x, Math.min(y + 1, world[0].length - 1));
+	}
+	
+	private void clearSpace(int x, int y){
 		Obstacle o = Obstacle.idToEnum(world[x][y]);
 		if(!o.isClippable()){
 			world[x][y] = Obstacle.NOTHING.getId();
@@ -102,7 +111,7 @@ public class Sandbox {
 	
 	private void reverse(int index){
 		Creature c = this.creatureList.get(index);
-		c.setDir(Direction.values()[(c.getDir().ordinal() + 2) % Direction.values().length]);
+		c.setDir(Direction.getNextDirection(MovementAction.REVERSE, c.getDir()));
 	}
 	
 	private boolean moveForward(int index){
@@ -112,7 +121,7 @@ public class Sandbox {
 	
 	private boolean moveBackward(int index){
 		Creature c = this.creatureList.get(index);
-		return move(index, Direction.values()[(c.getDir().ordinal() + 2) % Direction.values().length]);
+		return move(index, Direction.getNextDirection(MovementAction.REVERSE, c.getDir()));
 	}
 	
 	private boolean move(int index, Direction dir){
@@ -149,12 +158,11 @@ public class Sandbox {
 	
 	private void turnLeft(int index){
 		Creature c = this.creatureList.get(index);
-		int i = ((c.getDir().ordinal() - 1) < 0)? (c.getDir().ordinal() - 1) + Direction.values().length :(c.getDir().ordinal() - 1);
-		c.setDir(Direction.values()[i]);
+		c.setDir(Direction.getNextDirection(MovementAction.TURN_LEFT, c.getDir()));
 	}
 	
 	private void turnRight(int index){
 		Creature c = this.creatureList.get(index);
-		c.setDir(Direction.values()[(c.getDir().ordinal() + 1) % Direction.values().length]);
+		c.setDir(Direction.getNextDirection(MovementAction.TURN_RIGHT, c.getDir()));
 	}
 }
