@@ -3,6 +3,7 @@ package sandbox.sensor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import sandbox.Creature;
 import sandbox.Sandbox;
@@ -23,6 +24,10 @@ public abstract class Sensor {
 	
 	public Sense getSense(String senseName){
 		return senses.get(senseName);
+	}
+	
+	public Set<String> getSenseKeys(){
+		return senses.keySet();
 	}
 	
 	public abstract void updateSenses(Sandbox sandbox);

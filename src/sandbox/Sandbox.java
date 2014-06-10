@@ -74,6 +74,16 @@ public class Sandbox {
 		case REMOVE_OBSTACLE:
 			removeObstacle(index);
 			break;
+		case MOVE_LEFT:
+			turnLeft(index);
+			bump = moveForward(index);
+			break;
+		case MOVE_RIGHT:
+			turnRight(index);
+			bump = moveForward(index);
+			break;
+		case STAND:
+			break;
 		}
 		Creature c = this.creatureList.get(index);
 		this.lastActionHistory.put(c, new ActionHistory(action, !bump));

@@ -3,6 +3,7 @@ package sandbox.sensor;
 import java.util.List;
 
 import agent.lfo.DirtBasedAgentSenseConfig;
+import sandbox.ActionHistory;
 import sandbox.Creature;
 import sandbox.Direction;
 import sandbox.Sandbox;
@@ -63,9 +64,13 @@ public class DirtBasedSensor extends Sensor{
 				}
 				break;
 			}
-			
+			ActionHistory h = sandbox.getLastActionHistory(c);
 			this.senses.get(d.name() + DirtBasedAgentSenseConfig.TYPE_SUFFIX).setValue(obstacle);
-			this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(count);
+			if (h.isAbleToTake()){
+				this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(count);
+			}else{
+				this.senses.get(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).setValue(-1);
+			}
 		}
 	}
 

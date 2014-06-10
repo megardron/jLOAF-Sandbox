@@ -8,4 +8,8 @@ public enum MovementAction {
 	REVERSE,
 	
 	REMOVE_OBSTACLE,
+	
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	STAND,
 }

@@ -5,4 +5,5 @@ public class DirtBasedAgentSenseConfig {
 	
 	public static final String TYPE_SUFFIX = "-TYPE";
 	public static final String DISTANCE_SUFFIX = "-DIST";
+	
 }
