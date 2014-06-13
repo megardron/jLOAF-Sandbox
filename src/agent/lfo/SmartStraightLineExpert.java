@@ -8,12 +8,12 @@ import sandbox.MovementAction;
 import sandbox.Obstacle;
 import sandbox.sensor.Sensor;
 
-public class SmartStrightLineExpert extends DirtBasedAgent{
+public class SmartStraightLineExpert extends DirtBasedAgent{
 	
 	private Random r;
 	private boolean hitWall;
 	
-	public SmartStrightLineExpert(int size, Creature c) {
+	public SmartStraightLineExpert(int size, Creature c) {
 		super(size, c);
 		r = new Random(0);
 		hitWall = false;
