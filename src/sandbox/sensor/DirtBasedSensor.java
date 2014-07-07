@@ -27,7 +27,7 @@ public class DirtBasedSensor extends Sensor{
 			int obstacle = 0;
 			switch(d){
 			case NORTH:
-				for (int i = oldX; i >= 0; i--){
+				for (int i = oldX - 1; i >= 0; i--){
 					if (world[i][oldY] != 0){
 						obstacle = world[i][oldY];
 						break;
@@ -36,7 +36,7 @@ public class DirtBasedSensor extends Sensor{
 				}
 				break;
 			case SOUTH:
-				for (int i = oldX; i < world.length; i++){
+				for (int i = oldX + 1; i < world.length; i++){
 					if (world[i][oldY] != 0){
 						obstacle = world[i][oldY];
 						break;
@@ -45,7 +45,7 @@ public class DirtBasedSensor extends Sensor{
 				}
 				break;
 			case EAST:
-				for (int i = oldY; i < world[0].length; i++){
+				for (int i = oldY + 1; i < world[0].length; i++){
 					if (world[oldX][i] != 0){
 						obstacle = world[oldX][i];
 						break;
@@ -54,7 +54,7 @@ public class DirtBasedSensor extends Sensor{
 				}
 				break;
 			case WEST:
-				for (int i = oldY; i >= 0; i--){
+				for (int i = oldY - 1; i >= 0; i--){
 					if (world[oldX][i] != 0){
 						obstacle = world[oldX][i];
 						break;

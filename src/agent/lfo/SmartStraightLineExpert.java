@@ -5,10 +5,8 @@ import java.util.Random;
 import sandbox.Creature;
 import sandbox.Direction;
 import sandbox.MovementAction;
-import sandbox.Obstacle;
-import sandbox.sensor.Sensor;
 
-public class SmartStraightLineExpert extends DirtBasedAgent{
+public class SmartStraightLineExpert extends SmartExpert{
 	
 	private Random r;
 	private boolean hitWall;
@@ -21,19 +19,9 @@ public class SmartStraightLineExpert extends DirtBasedAgent{
 
 	@Override
 	public MovementAction testAction(Creature c) {
-		boolean hitSomething = false;
-		Sensor s = c.getSensor();
-		for (Direction d : Direction.values()){
-			int value = (int) s.getSense(d.name() + DirtBasedAgentSenseConfig.TYPE_SUFFIX).getValue();
-			if (Obstacle.DIRT.ordinal() == value){
-				MovementAction a = calculateMovement(c.getDir(), d);
-				if (a != null){
-					return a;
-				}
-			}
-			if ((int)s.getSense(d.name() + DirtBasedAgentSenseConfig.DISTANCE_SUFFIX).getValue() == -1){
-				hitSomething = true;
-			}
+		MovementAction action = this.nextSmartDirection(c);
+		if (action != null){
+			return action;
 		}
 		if (hitSomething){
 			hitWall = true;
