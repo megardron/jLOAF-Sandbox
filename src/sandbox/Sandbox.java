@@ -71,9 +71,6 @@ public class Sandbox {
 		case REVERSE:
 			reverse(index);
 			break;
-		case REMOVE_OBSTACLE:
-			removeObstacle(index);
-			break;
 		case MOVE_LEFT:
 			turnLeft(index);
 			bump = moveForward(index);
@@ -82,9 +79,15 @@ public class Sandbox {
 			turnRight(index);
 			bump = moveForward(index);
 			break;
+		case REMOVE_OBSTACLE:
+			//removeObstacle(index);
+			action = MovementAction.STAND;
+			break;
 		case STAND:
 			break;
 		}
+		removeObstacle(index);
+		
 		Creature c = this.creatureList.get(index);
 		this.lastActionHistory.put(c, new ActionHistory(action, !bump));
 		c.getSensor().updateSenses(this);
@@ -96,10 +99,10 @@ public class Sandbox {
 		int y = c.getY();
 		
 		clearSpace(x, y);
-		clearSpace(Math.max(x - 1, 0), y);
-		clearSpace(Math.min(x + 1, world.length - 1), y);
-		clearSpace(x, Math.max(y - 1, 0));
-		clearSpace(x, Math.min(y + 1, world[0].length - 1));
+		//clearSpace(Math.max(x - 1, 0), y);
+		//clearSpace(Math.min(x + 1, world.length - 1), y);
+		//clearSpace(x, Math.max(y - 1, 0));
+		//clearSpace(x, Math.min(y + 1, world[0].length - 1));
 	}
 	
 	private void clearSpace(int x, int y){
